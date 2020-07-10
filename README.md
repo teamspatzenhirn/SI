@@ -1,5 +1,8 @@
 # SI
-Library for providing unit support using the C++ type system. A unit can be uniquely represented by a 7-tuple of exponents for the basis units 
+Library for providing unit support using the C++ type system. Similar to [Boost.Units](https://www.boost.org/doc/libs/1_65_0/doc/html/boost_units.html) but
+without external dependencies and no added overhead (even during compilation) for features that are not used.
+
+A unit can be uniquely represented by a 7-tuple of exponents for the basis units 
 (second, metre, kilogram, ampere, kelvin, mol and candela). The SI library is based around this representation, additonally there is a template parameter
 which specifies the underlying numerical type, the primary class (template) is defined as:
 ```c++
@@ -34,7 +37,9 @@ All operations that are well-defined are implemented. Possible operation (non co
 ### STL-Support
 
 ## Configuration
-default_type
+For the literals and the predefined constants the underlying type is fixed to type `si::default_type` which is `double` by default.
+This can be changed by setting the `SI_DEFAULT_TYPE` define to another type. This can either be done manually before including any part of the library
+or by setting it directly using a compiler flag (e.g. `-DSI_DEFAULT_TYPE=float`) or your build system.
 
 ## Known Problems
  * The library does not handle angles, as they are not part of the SI system
