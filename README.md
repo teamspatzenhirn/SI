@@ -39,3 +39,4 @@ default_type
 ## Known Problems
  * The library does not handle angles, as they are not part of the SI system
  * As Kilograms are a base unit with unit prefix the corresponding literals are strange: one million grams is `1_k_kilogram` for example.
+ * Non-Integer Exponents, as template arguments can only be of integral type
