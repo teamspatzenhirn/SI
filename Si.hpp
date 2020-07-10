@@ -8,8 +8,18 @@
 #ifndef SI_SI_HPP
 #define SI_SI_HPP
 
+#if __cpp_conditional_explicit
+    #define EXPLICIT(expr) explicit(expr)
+#else
+    #define EXPLICIT(expr) explicit
+#endif
+
 namespace si {
-    using default_type = float;
+#ifndef SI_DEFAULT_TYPE
+    using default_type = double;
+#else
+    using default_type = SI_DEFAULT_TYPE;
+#endif
 
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T = default_type>
     class Si {
@@ -20,9 +30,9 @@ namespace si {
 
             constexpr Si() noexcept = default;
 
-            constexpr explicit(!isScalar) Si(T val) noexcept;
+            constexpr EXPLICIT(!isScalar) Si(T val) noexcept;
 
-            constexpr explicit(!isScalar) operator T() const;
+            constexpr EXPLICIT(!isScalar) operator T() const;
 
             template<typename T_>
             constexpr explicit operator T_() const;
