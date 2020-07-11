@@ -44,4 +44,4 @@ or by setting it directly using a compiler flag (e.g. `-DSI_DEFAULT_TYPE=float`)
 ## Known Problems
  * The library does not handle angles, as they are not part of the SI system
  * As Kilograms are a base unit with unit prefix the corresponding literals are strange: one million grams is `1_k_kilogram` for example.
- * Non-Integer Exponents, as template arguments can only be of integral type
+ * Non-Integer Exponents are not supported, as template arguments can only be of integral type

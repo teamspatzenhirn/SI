@@ -9,8 +9,14 @@
 #define SI_SIEXTENDED_HPP
 
 #include <iostream>
+
 #include "Si.hpp"
-#include "SiLiterals.hpp"
+#include "SiGenerator.hpp"
+
+SI_CREATE_UNIT(Speed, speed, 1, 0, -1, 0, 0, 0, 0)
+SI_CREATE_UNIT(Acceleration, acceleration, 1, 0, -2, 0, 0, 0, 0)
+SI_CREATE_UNIT(Volt, volt, 2, 1, -3, -1, 0, 0, 0)
+SI_CREATE_UNIT(Hertz, hertz, 0, 0, -1, 0, 0, 0, 0)
 
 namespace si {
     template<int exp>
@@ -42,28 +48,6 @@ namespace si {
         return ostream;
     }
 
-    template<typename T = si::default_type>
-    using Speed = Si<1, 0, -1, 0, 0, 0, 0, T>;
-    constexpr Speed<> speed{1};
-
-    template<typename T = si::default_type>
-    using Acceleration = Si<1, 0, -2, 0, 0, 0, 0, T>;
-    constexpr Acceleration<> acceleration{1};
-
-    template<typename T = si::default_type>
-    using Volt = Si<2, 1, -3, -1, 0, 0, 0, T>;
-    constexpr Volt<> volt{1};
-
-    template<typename T = si::default_type>
-    using Hertz = Si<0, 0, -1, 0, 0, 0, 0, T>;
-    constexpr Hertz<> hertz{1};
-
-    namespace literals {
-        CREATE_ALL_PREFIX(speed, 1, 0, -1, 0, 0, 0, 0)
-        CREATE_ALL_PREFIX(acceleration, 1, 0, -2, 0, 0, 0, 0)
-        CREATE_ALL_PREFIX(volt, 2, 1, -3, -1, 0, 0, 0)
-        CREATE_ALL_PREFIX(hertz, 0, 0, -1, 0, 0, 0, 0)
-    }
 }
 
 #endif
