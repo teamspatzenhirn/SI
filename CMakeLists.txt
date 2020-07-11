@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(SI)
 
-add_library(${PROJECT_NAME} SHARED SiExtended.cpp)
+add_library(${PROJECT_NAME} SHARED SiPrinter.cpp)
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED OFF)
@@ -12,3 +12,5 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 else()
     target_compile_options(${PROJECT_NAME} PRIVATE -O3)
 endif ()
+
+add_subdirectory(examples)
