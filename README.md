@@ -77,8 +77,33 @@ std::cout << density << std::endl; // Prints: 30 m^3 / kg
 ```
 
 ### STL-Support
+Some STL functions are overloaded for SI types. In their implementation the
+functions use the respective functions of the underlying type so these functions
+need to exist. Include `SiStl.hpp` to use the functions. Namely the functions
+are:
+ * `std::sqrt` requires for all unit exponents to be dividable by two
+ * `std::abs` works for all SI types
+ * `std::round` works for all SI types
+ * `std::isnan` works for all SI types
+ * `std::atan2` requires that both arguments are of the same type
+New functions can be easily added in the `SiStl.hpp` header.
+
+Example:
+```c++
+auto v_x = 10_meter / 1_second;
+auto v_y = -20_meter / 1_second;
+
+auto v_y_abs = std::abs(v_y);
+auto v = std::sqrt(v_x * v_x + v_y * v_y); 
+```
 
 ### Adding more units
+If a unit is used multiple times it can be comfortable to add a custom type for this unit, for this use the 
+`SiGenerator.hpp` header which provides macros for this. The macro `SI_CREATE_UNIT(Name, name, m, kg, s, A, K, Mol, CD)`
+takes the `Name` (used for the type), `name` used for the literals and constants and the seven exponents to create
+the correct type, constant and literals for all unit-prefixes.
+
+Feel free to add the type to `SiExtended.hpp` and create a pull request!
 
 ## Requirements
  * **Compiler:** The library requires a recent C++ compiler with support for C++17, preferably a compiler with support for C++20 is used to enable all features.
