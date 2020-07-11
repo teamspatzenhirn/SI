@@ -21,7 +21,7 @@ SI_CREATE_UNIT(Mole, mole, 0, 0, 0, 0, 0, 1, 0)
 SI_CREATE_UNIT(Candela, candela, 0, 0, 0, 0, 0, 0, 1)
 
 
-namespace si::literals {
+namespace si { namespace literals {
     // Prefix for double
     constexpr Scalar<> operator "" _Y(long double t) { return Scalar<>{static_cast<si::default_type>(t * 1E24)}; }
 
@@ -103,6 +103,6 @@ namespace si::literals {
     constexpr Scalar<> operator "" _z(unsigned long long t) { return Scalar<>{static_cast<si::default_type>(t * 1E-21)}; }
 
     constexpr Scalar<> operator "" _y(unsigned long long t) { return Scalar<>{static_cast<si::default_type>(t * 1E-24)}; }
-}
+} }
 
 #endif

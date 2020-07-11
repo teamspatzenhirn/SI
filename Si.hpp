@@ -32,7 +32,7 @@ namespace si {
 
             constexpr EXPLICIT(!isScalar) Si(T val) noexcept;
 
-            constexpr EXPLICIT(!isScalar) operator T() const;
+            constexpr EXPLICIT(!isScalar) operator T() const noexcept;
 
             template<typename T_>
             constexpr explicit operator T_() const;
@@ -59,7 +59,7 @@ namespace si {
             // Multiply with Unitless
             template<typename T_>
             constexpr auto
-            operator*(T_ rhs) const -> Si<m, kg, s, A, K, MOL, CD, decltype(static_cast<T>(*this) * rhs)>;
+            operator*(T_ rhs) const -> Si<m, kg, s, A, K, MOL, CD, decltype(this->operator T() * rhs)>;
 
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_, typename T__>
             friend constexpr auto operator*(T__ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
@@ -68,7 +68,7 @@ namespace si {
             // Divide by Unitless
             template<typename T_>
             constexpr auto
-            operator/(T_ rhs) const -> Si<m, kg, s, A, K, MOL, CD, decltype(static_cast<T>(*this) * rhs)>;
+            operator/(T_ rhs) const -> Si<m, kg, s, A, K, MOL, CD, decltype(this->operator T() * rhs)>;
 
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_, typename T__>
             friend constexpr auto operator/(T__ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
@@ -97,7 +97,7 @@ namespace si {
     constexpr Si<m, kg, s, A, K, MOL, CD, T>::Si(T val) noexcept : val{val} {}
 
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
-    constexpr Si<m, kg, s, A, K, MOL, CD, T>::operator T() const {
+    constexpr Si<m, kg, s, A, K, MOL, CD, T>::operator T() const noexcept {
         return val;
     }
 
@@ -139,7 +139,7 @@ namespace si {
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
     template<typename T_>
     constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator*(T_ rhs) const
-    -> Si<m, kg, s, A, K, MOL, CD, decltype(static_cast<T>(*this) * rhs)> {
+    -> Si<m, kg, s, A, K, MOL, CD, decltype(this->operator T() * rhs)> {
         return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val * rhs};
     }
 
@@ -153,7 +153,7 @@ namespace si {
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
     template<typename T_>
     constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator/(T_ rhs) const
-    -> Si<m, kg, s, A, K, MOL, CD, decltype(static_cast<T>(*this) * rhs)> {
+    -> Si<m, kg, s, A, K, MOL, CD, decltype(this->operator T() * rhs)> {
         return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val / rhs};
     }
 
