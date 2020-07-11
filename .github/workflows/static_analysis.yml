@@ -20,7 +20,7 @@ jobs:
           # fetch-depth = 0 is equivalent to entire commit-history
           fetch-depth: 0
       # Sonar wants the target branch, but actions/checkout only fetches the current ref
-      - run: git fetch origin develop:refs/remotes/origin/master
+      - run: git fetch origin master:refs/remotes/origin/master
       - name: Restore cache for sonar analysis
         uses: actions/cache@v1
         env:
