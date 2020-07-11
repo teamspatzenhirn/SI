@@ -21,7 +21,10 @@ All operations that are well-defined are implemented. Possible operation (non co
 
 ## Examples
 ### Basic usage
-There types and constants for all base units and some derived units:
+There types and constants for all base units and some derived units. For only the base units include
+`SiBase.hpp` for the derived units include `SiExtended.hpp`.
+
+Example
 ```c++
 Meter<> dist = 1 * meter + 2 * meter;
 Speed<> v = dist / (3 * second);
@@ -33,6 +36,8 @@ They can be used with both floating point and integer constants.
 
 Examples:
 ```c++
+using namespace si::literals;
+
 auto v = 10_meter / 1_second;
 auto strangeUnit = 1_kilogram / 10_ampere * 1_kelvin * 1_candela;
 ```
@@ -45,13 +50,35 @@ auto very_fast = 1_k_meter / 1_m_second; // Kilometer / Millisecond
 auto rather_slow = 1_mu_meter / 1_Y_second; // Micrometer / Yotasecond
 ```
 
-### Operations
+### Scalars
+There is also a `Scalar` type for seamless interaction with unitless types:
+```c++
+Scalar<> s = 1_scalar + 1 * scalar;
+auto normalVariable = static_cast<si::default_type>(s); // By default of type double
+```
+
+If your compiler supports C++20 and 
+"[`explicit(bool)`](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0892r2.html)" you do not need the explicit
+casts. The example simplifies to:
+```c++
+Scalar<> s = 1 + 1;
+double normalVariable = s;
+```
 
 ### Printing Types
+SI natively supports printing variables with their respective unit. The `std::ostream operator<<` is
+overloaded for the types. For printing types include the `SiPrinter.hpp` header.
 
-#### Support for well-known Units
+```c++
+auto v = 10_meter / 1_second;
+auto density = (3_meter * 4_meter * 5_meter) / 2_kilogram;
+std::cout << v << std::endl; // Prints: 10 m / s
+std::cout << density << std::endl; // Prints: 30 m^3 / kg
+```
 
 ### STL-Support
+
+### Adding more units
 
 ## Requirements
  * **Compiler:** The library requires a recent C++ compiler with support for C++17, preferably a compiler with support for C++20 is used to enable all features.

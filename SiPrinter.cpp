@@ -12,11 +12,11 @@ namespace si {
 
     template<>
     void printHelper<-1>(std::ostream &ostream, const char *name) {
-        ostream << "/" << name;
+        ostream << " / " << name;
     }
 
     template<>
     void printHelper<1>(std::ostream &ostream, const char *name) {
-        ostream << name;
+        ostream << " " << name;
     }
 }
