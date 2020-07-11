@@ -8,7 +8,6 @@
 #include <SiBase.hpp>
 #include <SiExtended.hpp>
 #include <SiPrinter.hpp>
-#include <SiPrinter.hpp>
 
 int main() {
     using namespace si::literals;

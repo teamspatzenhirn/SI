@@ -38,7 +38,6 @@ namespace si {
         printHelper<CD>(ostream, "Cd");
     }
 
-
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
     std::ostream &operator<<(std::ostream &ostream, const Si<m, kg, s, A, K, MOL, CD, T> &si) {
         auto val = static_cast<T>(si);
