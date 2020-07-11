@@ -101,7 +101,8 @@ auto v = std::sqrt(v_x * v_x + v_y * v_y);
 If a unit is used multiple times it can be comfortable to add a custom type for this unit, for this use the 
 `SiGenerator.hpp` header which provides macros for this. The macro `SI_CREATE_UNIT(Name, name, m, kg, s, A, K, Mol, CD)`
 takes the `Name` (used for the type), `name` used for the literals and constants and the seven exponents to create
-the correct type, constant and literals for all unit-prefixes.
+the correct type, constant and literals for all unit-prefixes. When using the macro be sure to not be in any namespace
+as this will put the type in this namespace as well.
 
 Feel free to add the type to `SiExtended.hpp` and create a pull request!
 
