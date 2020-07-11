@@ -13,15 +13,22 @@ class Si {
 ```
 All operations that are well-defined are implemented. Possible operation (non complete) are:
  * Addition/Subtraction: if both arguments have the same 7 exponents
- * Multiplikation/Division: always, the resulting type has the sum/difference of the individual exponents
+ * Multiplication/Division: always, the resulting type has the sum/difference of the individual exponents
  * Scaling with a unitless factor and unary minus (i.e. negative)
  * Equality: only for same exponents, then equality of the underlying type is used
  * Size-Relation: only for same exponents, then size relation of the underlying type is used
  * Some STL Function, for example `std::sqrt`, implementation depending on the function
 
 ## Examples
+### Basic usage
+There types and constants for all base units and some derived units:
+```c++
+Meter<> dist = 1 * meter + 2 * meter;
+Speed<> v = dist / (3 * second);
+Second<> time = v * 10 * second;
+```
 ### Literals
-There are literals for all base units and some derived units.
+There are additonally literals for all base units and some derived units.
 They can be used with both floating point and integer constants.
 
 Examples:
@@ -47,7 +54,10 @@ auto rather_slow = 1_mu_meter / 1_Y_second; // Micrometer / Yotasecond
 ### STL-Support
 
 ## Requirements
- * **Compiler:** The library requires a recent C++ compiler with support for C++17, for example GCC-7 or later. Preferably a compiler with support for C++20 is used to enable all features.
+ * **Compiler:** The library requires a recent C++ compiler with support for C++17, preferably a compiler with support for C++20 is used to enable all features.
+    Supported compilers are:
+    * GCC >= 7
+    * Clang >= 6
  * **Build System:** The library is intended to be built with CMake (Version 3.10 or later)
 
 
