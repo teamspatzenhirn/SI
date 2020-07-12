@@ -40,9 +40,6 @@ namespace si {
             template<typename T_>
             constexpr explicit operator Si<m, kg, s, A, K, MOL, CD, T_>() const;
 
-            // Size relation
-            constexpr auto operator<(ThisT rhs) const -> bool;
-
             // Add (only same units)
             constexpr auto operator+(ThisT rhs) const -> ThisT;
 
@@ -59,7 +56,7 @@ namespace si {
             // Multiply with Unitless
             template<typename T_>
             constexpr auto
-            operator*(T_ rhs) const -> Si<m, kg, s, A, K, MOL, CD, decltype(this->operator T() * rhs)>;
+            operator*(T_ rhs) const -> Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() * rhs)>;
 
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_, typename T__>
             friend constexpr auto operator*(T__ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
@@ -68,7 +65,7 @@ namespace si {
             // Divide by Unitless
             template<typename T_>
             constexpr auto
-            operator/(T_ rhs) const -> Si<m, kg, s, A, K, MOL, CD, decltype(this->operator T() * rhs)>;
+            operator/(T_ rhs) const -> Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() * rhs)>;
 
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_, typename T__>
             friend constexpr auto operator/(T__ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
@@ -84,10 +81,24 @@ namespace si {
             constexpr auto operator/(Si<m_, kg_, s_, A_, K_, MOL_, CD_, T> rhs) const
             -> Si<m - m_, kg - kg_, s - s_, A - A_, K - K_, MOL - MOL_, CD - CD_, T>;
 
+#ifndef __cpp_impl_three_way_comparison
             // Equal
             constexpr auto operator==(ThisT rhs) const;
 
             constexpr auto operator!=(ThisT rhs) const;
+
+            // Size relation
+            constexpr auto operator<(ThisT rhs) const -> bool;
+
+            constexpr auto operator>(ThisT rhs) const -> bool;
+
+            constexpr auto operator<=(ThisT rhs) const -> bool;
+
+            constexpr auto operator>=(ThisT rhs) const -> bool;
+#else
+            auto operator<=>(const ThisT &rhs) const = default;
+#endif
+
         private:
             T val;
     };
@@ -105,12 +116,6 @@ namespace si {
     template<typename T_>
     constexpr Si<m, kg, s, A, K, MOL, CD, T>::operator Si<m, kg, s, A, K, MOL, CD, T_>() const {
         return Si<m, kg, s, A, K, MOL, CD, T_>{static_cast<T_>(this->val)};
-    }
-
-    // Size comparison
-    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
-    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator<(Si::ThisT rhs) const -> bool {
-        return this->val < static_cast<T>(rhs);
     }
 
     // Add
@@ -135,11 +140,17 @@ namespace si {
         this->val -= rhs.val;
     }
 
+    // Unary minus
+    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator-() const -> Si::ThisT {
+        return ThisT{-val};
+    }
+
     // Multiply by scalar
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
     template<typename T_>
     constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator*(T_ rhs) const
-    -> Si<m, kg, s, A, K, MOL, CD, decltype(this->operator T() * rhs)> {
+    -> Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() * rhs)> {
         return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val * rhs};
     }
 
@@ -153,7 +164,7 @@ namespace si {
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
     template<typename T_>
     constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator/(T_ rhs) const
-    -> Si<m, kg, s, A, K, MOL, CD, decltype(this->operator T() * rhs)> {
+    -> Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() * rhs)> {
         return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val / rhs};
     }
 
@@ -185,6 +196,7 @@ namespace si {
         return static_cast<T_>(val);
     }
 
+#ifndef __cpp_impl_three_way_comparison
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
     constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator==(Si::ThisT rhs) const {
         return this->val == static_cast<T>(rhs);
@@ -195,11 +207,27 @@ namespace si {
         return !((*this) == rhs);
     }
 
+    // Size comparison
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
-    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator-() const -> Si::ThisT {
-        return ThisT{-val};
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator<(Si::ThisT rhs) const -> bool {
+        return this->val < static_cast<T>(rhs);
     }
 
+    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator>(Si::ThisT rhs) const -> bool {
+        return this->val > static_cast<T>(rhs);
+    }
+
+    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator<=(Si::ThisT rhs) const -> bool {
+        return this->val <= static_cast<T>(rhs);
+    }
+
+    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator>=(Si::ThisT rhs) const -> bool {
+        return this->val >= static_cast<T>(rhs);
+    }
+#endif
 
 }
 
