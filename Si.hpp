@@ -2,7 +2,7 @@
  * @file Si.hpp
  * @author paul
  * @date 20.03.19
- * @brief Si @TODO
+ * @brief Main implementation of the Si class which is the basis for all other functions.
  */
 
 #ifndef SI_SI_HPP
@@ -231,4 +231,4 @@ namespace si {
 
 }
 
-#endif //FLIGHTCOMPUTER_SI_HPP
+#endif

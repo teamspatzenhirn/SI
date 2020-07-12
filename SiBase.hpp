@@ -2,7 +2,7 @@
  * @file SiBase.hpp
  * @author paul
  * @date 21.03.19
- * @brief SiBase @TODO
+ * @brief Definition of the types, constant and literals for all 7 base units.
  */
 
 #ifndef SI_SIBASE_HPP

@@ -2,7 +2,7 @@
  * @file SiExtended.hpp
  * @author paul
  * @date 23.03.19
- * @brief SiExtended @TODO
+ * @brief Definition of the types, constants and literals for derived types.
  */
 
 #ifndef SI_SIEXTENDED_HPP

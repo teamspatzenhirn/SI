@@ -2,7 +2,7 @@
  * @file SiPrinter.cpp
  * @author paul
  * @date 11.07.20
- * Description here TODO
+ * Implementation of the specializations for the printer module.
  */
 #include "SiPrinter.hpp"
 

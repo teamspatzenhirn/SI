@@ -2,7 +2,7 @@
  * @file SiPrinter.hpp
  * @author paul
  * @date 11.07.20
- * Description here TODO
+ * Declaration of all functions related to printing Si instances together with their respective unit.
  */
 #ifndef SI_SIPRINTER_HPP
 #define SI_SIPRINTER_HPP
