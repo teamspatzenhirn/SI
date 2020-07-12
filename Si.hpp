@@ -8,6 +8,8 @@
 #ifndef SI_SI_HPP
 #define SI_SI_HPP
 
+#include <utility>
+
 #if __cpp_conditional_explicit
     #define EXPLICIT(expr) explicit(expr)
 #else
