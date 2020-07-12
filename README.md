@@ -71,7 +71,7 @@ overloaded for the types. For printing types include the `SiPrinter.hpp` header.
 
 ```c++
 auto v = 10_meter / 1_second;
-auto density = (3_meter * 4_meter * 5_meter) / 2_kilogram;
+auto density =  2_kilogram / (3_meter * 4_meter * 5_meter);
 std::cout << v << std::endl; // Prints: 10 m / s
 std::cout << density << std::endl; // Prints: 30 m^3 / kg
 ```
@@ -86,6 +86,7 @@ are:
  * `std::round` works for all SI types
  * `std::isnan` works for all SI types
  * `std::atan2` requires that both arguments are of the same type
+ 
 New functions can be easily added in the `SiStl.hpp` header.
 
 Example:
@@ -100,14 +101,16 @@ auto v = std::sqrt(v_x * v_x + v_y * v_y);
 ### Adding more units
 If a unit is used multiple times it can be comfortable to add a custom type for this unit, for this use the 
 `SiGenerator.hpp` header which provides macros for this. The macro `SI_CREATE_UNIT(Name, name, m, kg, s, A, K, Mol, CD)`
-takes the `Name` (used for the type), `name` used for the literals and constants and the seven exponents to create
-the correct type, constant and literals for all unit-prefixes. When using the macro be sure to not be in any namespace
-as this will put the type in this namespace as well.
+takes `Name` (used for the type), `name` used for the literals and constants and the seven exponents as arguments to 
+create the correct type, constant and literals for all unit-prefixes. When using the macro be sure to not be in any 
+namespace as this will put the type in this namespace as well.
 
-Feel free to add the type to `SiExtended.hpp` and create a pull request!
+Feel free to add the unit to `SiExtended.hpp` and create a pull request!
 
 ## Requirements
- * **Compiler:** The library requires a recent C++ compiler with support for C++17, preferably a compiler with support for C++20 is used to enable all features.
+ * **Compiler:** The library requires a recent C++ compiler with support for C++17, preferably a compiler with support 
+    for C++20 is used to enable all features.
+    
     Supported compilers are:
     * GCC >= 7
     * Clang >= 6
@@ -117,9 +120,10 @@ Feel free to add the type to `SiExtended.hpp` and create a pull request!
 ## Configuration
 For the literals and the predefined constants the underlying type is fixed to type `si::default_type` which is `double` by default.
 This can be changed by setting the `SI_DEFAULT_TYPE` define to another type. This can either be done manually before including any part of the library
-or by setting it directly using a compiler flag (e.g. `-DSI_DEFAULT_TYPE=float`) or your build system.
+or by setting it directly using a compiler flag (e.g. `-DSI_DEFAULT_TYPE=float`) either directly or via
+your build system of choice.
 
-## Known Problems
+## Known Problems (that will not get fixed)
  * The library does not handle angles, as they are not part of the SI system
  * As Kilograms are a base unit with unit prefix the corresponding literals are strange: one million grams is `1_k_kilogram` for example.
  * Non-Integer Exponents are not supported, as template arguments can only be of integral type
