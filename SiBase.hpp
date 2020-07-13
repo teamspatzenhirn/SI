@@ -8,7 +8,7 @@
 #ifndef SI_SIBASE_HPP
 #define SI_SIBASE_HPP
 
-#include "Si.hpp"
+#include "SiImpl.hpp"
 #include "SiGenerator.hpp"
 
 SI_CREATE_UNIT(Scalar, scalar, 0, 0, 0, 0, 0, 0, 0)

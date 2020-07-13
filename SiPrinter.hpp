@@ -10,7 +10,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "Si.hpp"
+#include "SiImpl.hpp"
 
 namespace si {
     template<int exp>

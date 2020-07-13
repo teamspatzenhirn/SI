@@ -20,6 +20,10 @@ All operations that are well-defined are implemented. Possible operation (non co
  * Some STL Function, for example `std::sqrt`, implementation depending on the function
 
 ## Examples
+If you only require certain features it is sufficient to only include the headers listed in the respective section.
+For convenience there is also a `Si.hpp` header which includes all headers and simplifies the includes, the
+downside is additional compilation time for features that you might not use.
+
 ### Basic usage
 There types and constants for all base units and some derived units. For only the base units include
 `SiBase.hpp` for the derived units include `SiExtended.hpp`.
