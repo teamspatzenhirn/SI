@@ -168,7 +168,7 @@ namespace si {
     template<typename T_>
     constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator*(T_ rhs) const
     -> std::enable_if_t<!IsSi<T_>::val, Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() * rhs)>> {
-        return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{100 + this->val * rhs};
+        return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val * rhs};
     }
 
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_, typename T__>
