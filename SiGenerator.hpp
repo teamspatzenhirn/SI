@@ -60,4 +60,22 @@ namespace si { \
     namespace literals { SI_CREATE_ALL_PREFIX(name, m, kg, s, A, K, Mol, CD) } \
 }
 
+#define SI_CUSTOM_PRINTER_IMPL(Type, name) \
+namespace si { \
+    template<> \
+    void unitToString \
+            <Type<>::meter, Type<>::kilogram, Type<>::second, Type<>::ampere, Type<>::kelvin, Type<>::mole, Type<>::candela> \
+            (std::ostream &ostream)  { \
+        ostream << " " << name; \
+    } \
+}
+
+#define SI_CUSTOM_PRINTER_DEC(Type) \
+namespace si { \
+    template<> \
+    void unitToString \
+            <Type<>::meter, Type<>::kilogram, Type<>::second, Type<>::ampere, Type<>::kelvin, Type<>::mole, Type<>::candela> \
+            (std::ostream &ostream); \
+}
+
 #endif

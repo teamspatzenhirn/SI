@@ -32,10 +32,18 @@ namespace si {
     class Si {
             using ThisT = Si<m, kg, s, A, K, MOL, CD, T>;
 
+            static constexpr bool isScalar = (m==0 && kg == 0 && s == 0 && A == 0 && K == 0 && MOL == 0 && CD == 0);
             static_assert(!IsSi<T>::val, "Type T for SI is another instance of SI, your are not allowed to "
                                          "wrap SI in SI");
         public:
-            static constexpr bool isScalar = (m==0 && kg == 0 && s == 0 && A == 0 && K == 0 && MOL == 0 && CD == 0);
+            static constexpr auto meter = m;
+            static constexpr auto kilogram = kg;
+            static constexpr auto second = s;
+            static constexpr auto ampere = A;
+            static constexpr auto kelvin = K;
+            static constexpr auto mole = MOL;
+            static constexpr auto candela = CD;
+
             using type = T;
 
             constexpr Si() noexcept = default;

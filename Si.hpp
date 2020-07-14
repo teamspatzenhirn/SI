@@ -10,6 +10,7 @@
 #include "SiBase.hpp"
 #include "SiExtended.hpp"
 #include "SiPrinter.hpp"
+#include "SiPrinterExtended.hpp"
 #include "SiStl.hpp"
 
 #endif

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(SI)
 
-add_library(${PROJECT_NAME} SHARED SiPrinter.cpp)
+add_library(${PROJECT_NAME} SHARED SiPrinter.cpp SiPrinterExtended.cpp)
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED OFF)

@@ -91,7 +91,7 @@ are:
  * `std::isnan` works for all SI types
  * `std::atan2` requires that both arguments are of the same type
  
-New functions can be easily added in the `SiStl.hpp` header.
+New functions can be easily added in the `SiStl.hpp` header (feel free to create a pull request!).
 
 Example:
 ```c++
@@ -110,6 +110,22 @@ create the correct type, constant and literals for all unit-prefixes. When using
 namespace as this will put the type in this namespace as well.
 
 Feel free to add the unit to `SiExtended.hpp` and create a pull request!
+
+### Printing custom types
+Many units have well known names which could be printed instead of using the canonical form consisting only of
+base units. For example instead of the the unit `1 m^2 kg s^-3` (which you probably did not recognize as  a volt), 
+one would prefer to print `1 V`.
+
+For this there is another set of macros to make it as easy as possible to add new types. Before adding the printer functions
+be sure that the type is added to the `SiExtended.hpp` function. Next open the file `SiPrinterExtended.hpp` and add
+the line `SI_CUSTOM_PRINTER_DEC(Volt)` this will generate the correct declaration for your type, the argument,
+`Volt` in this case, is the name of the type you defined earlier. Next add the line `SI_CUSTOM_PRINTER_IMPL(Volt, "V")`
+to `SiPrinterExtended.cpp`. The first argument is, once again, the type, the second argument is the name of your
+type, so the string that is printed.
+
+Be sure to include `SiPrinterExtended.hpp` (or `Si.hpp` for all headers like explained above) to use this specialization, 
+and recompile the code library if this is not automatically done by your build system. 
+Once again: feel free to create a pull request!
 
 ## Requirements
  * **Compiler:** The library requires a recent C++ compiler with support for C++17, preferably a compiler with support 
