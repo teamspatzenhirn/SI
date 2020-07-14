@@ -72,6 +72,8 @@ namespace si {
             constexpr auto operator*(T_ rhs) const
             -> std::enable_if_t<!IsSi<T_>::val, Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() * rhs)>>;
 
+            constexpr auto operator*=(T rhs) -> ThisT&;
+
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_, typename T__>
             friend constexpr auto operator*(T__ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
             -> std::enable_if_t<!IsSi<T__>::val, Si<m_, kg_, s_, A_, K_, MOL_, CD_, decltype(lhs * rhs.val)>>;
@@ -80,6 +82,8 @@ namespace si {
             template<typename T_>
             constexpr auto operator/(T_ rhs) const
             -> std::enable_if_t<!IsSi<T_>::val, Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() / rhs)>>;
+
+            constexpr auto operator/=(T rhs) -> ThisT&;
 
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_, typename T__>
             friend constexpr auto operator/(T__ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
@@ -171,6 +175,12 @@ namespace si {
         return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val * rhs};
     }
 
+    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator*=(T rhs) -> ThisT& {
+        this->val *= rhs;
+        return *this;
+    }
+
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_, typename T__>
     constexpr auto operator*(T__ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs)
     -> std::enable_if_t<!IsSi<T__>::val, Si<m, kg, s, A, K, MOL, CD, decltype(lhs * rhs.val)>> {
@@ -183,6 +193,12 @@ namespace si {
     constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator/(T_ rhs) const
     -> std::enable_if_t<!IsSi<T_>::val, Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() / rhs)>> {
         return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val / rhs};
+    }
+
+    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator/=(T rhs) -> ThisT& {
+        this->val /= rhs;
+        return *this;
     }
 
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_, typename T__>
