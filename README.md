@@ -134,7 +134,7 @@ Once again: feel free to create a pull request!
     Supported compilers are:
     * GCC >= 7
     * Clang >= 6
- * **Build System:** The library is intended to be built with CMake (Version 3.10 or later)
+ * **Build System:** The library is intended to be built with CMake (Version 3.12 or later)
 
 
 ## Configuration
