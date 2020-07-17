@@ -25,8 +25,8 @@ For convenience there is also a `Si.hpp` header which includes all headers and s
 downside is additional compilation time for features that you might not use.
 
 ### Basic usage
-There types and constants for all base units and some derived units. For only the base units include
-`SiBase.hpp` for the derived units include `SiExtended.hpp`.
+There are types and constants for all base units and some derived units. For only the base units include
+`SiBase.hpp`, for the derived units include `SiExtended.hpp`.
 
 Example
 ```c++
