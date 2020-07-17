@@ -76,26 +76,23 @@ namespace si {
             constexpr auto operator-() const -> ThisT;
 
             // Multiply with Unitless
-            template<typename T_>
-            constexpr auto operator*(T_ rhs) const
-            -> std::enable_if_t<!IsSi<T_>::val, Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() * rhs)>>;
+            constexpr auto operator*(T rhs) const -> Si<m, kg, s, A, K, MOL, CD, T>;
 
             constexpr auto operator*=(T rhs) -> ThisT&;
 
-            template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_, typename T__>
-            friend constexpr auto operator*(T__ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
-            -> std::enable_if_t<!IsSi<T__>::val, Si<m_, kg_, s_, A_, K_, MOL_, CD_, decltype(lhs * rhs.val)>>;
+            template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_>
+            friend constexpr auto operator*(T_ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
+            -> Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_>;
 
             // Divide by Unitless
-            template<typename T_>
-            constexpr auto operator/(T_ rhs) const
-            -> std::enable_if_t<!IsSi<T_>::val, Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() / rhs)>>;
+            constexpr auto operator/(T rhs) const
+            -> Si<m, kg, s, A, K, MOL, CD, T>;
 
             constexpr auto operator/=(T rhs) -> ThisT&;
 
-            template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_, typename T__>
-            friend constexpr auto operator/(T__ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
-            -> std::enable_if_t<!IsSi<T__>::val, Si<-m_, -kg_, -s_, -A_, -K_, -MOL_, -CD_, decltype(lhs / rhs.val)>>;
+            template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_>
+            friend constexpr auto operator/(T_ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
+            -> Si<-m_, -kg_, -s_, -A_, -K_, -MOL_, -CD_, T_>;
 
             // Multiply with Unit
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_>
@@ -177,9 +174,8 @@ namespace si {
 
     // Multiply by scalar
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
-    template<typename T_>
-    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator*(T_ rhs) const
-    -> std::enable_if_t<!IsSi<T_>::val, Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() * rhs)>> {
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator*(T rhs) const
+    -> Si<m, kg, s, A, K, MOL, CD, T> {
         return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val * rhs};
     }
 
@@ -189,17 +185,16 @@ namespace si {
         return *this;
     }
 
-    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_, typename T__>
-    constexpr auto operator*(T__ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs)
-    -> std::enable_if_t<!IsSi<T__>::val, Si<m, kg, s, A, K, MOL, CD, decltype(lhs * rhs.val)>> {
-        return Si<m, kg, s, A, K, MOL, CD, decltype(lhs * rhs.val)>{lhs * rhs.val};
+    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_>
+    constexpr auto operator*(T_ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs)
+    -> Si<m, kg, s, A, K, MOL, CD, T_> {
+        return Si<m, kg, s, A, K, MOL, CD, T_>{lhs * rhs.val};
     }
 
     // Divide by scalar
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
-    template<typename T_>
-    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator/(T_ rhs) const
-    -> std::enable_if_t<!IsSi<T_>::val, Si<m, kg, s, A, K, MOL, CD, decltype(std::declval<T>() / rhs)>> {
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator/(T rhs) const
+    -> Si<m, kg, s, A, K, MOL, CD, T> {
         return Si<m, kg, s, A, K, MOL, CD, decltype(this->val * rhs)>{this->val / rhs};
     }
 
@@ -209,10 +204,10 @@ namespace si {
         return *this;
     }
 
-    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_, typename T__>
-    constexpr auto operator/(T__ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs)
-    -> std::enable_if_t<!IsSi<T__>::val, Si<-m, -kg, -s, -A, -K, -MOL, -CD, decltype(lhs / rhs.val)>> {
-        return Si<-m, -kg, -s, -A, -K, -MOL, -CD, decltype(lhs * rhs.val)>{lhs / static_cast<T_>(rhs)};
+    template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_>
+    constexpr auto operator/(T_ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs)
+    -> Si<-m, -kg, -s, -A, -K, -MOL, -CD, T_> {
+        return Si<-m, -kg, -s, -A, -K, -MOL, -CD, T_>{lhs / static_cast<T_>(rhs)};
     }
 
     // Multiply with different type

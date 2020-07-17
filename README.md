@@ -30,9 +30,9 @@ There are types and constants for all base units and some derived units. For onl
 
 Example
 ```c++
-Meter<> dist = 1 * meter + 2 * meter;
-Speed<> v = dist / (3 * second);
-Second<> time = v * 10 * second;
+Meter<> dist = 1.0 * meter + 2.0 * meter;
+Speed<> v = dist / (3.0 * second);
+Second<> time = v * 10.0 * second;
 ```
 ### Literals
 There are additonally literals for all base units and some derived units.
@@ -65,7 +65,7 @@ If your compiler supports C++20 and
 "[`explicit(bool)`](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0892r2.html)" you do not need the explicit
 casts. The example simplifies to:
 ```c++
-Scalar<> s = 1 + 1;
+Scalar<> s = 1.0 + 1.0;
 double normalVariable = s;
 ```
 
