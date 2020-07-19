@@ -32,7 +32,7 @@ namespace si { namespace util {
      * type here.
      */
     template <typename T, typename SIZE_T = T>
-    using CondCRef = CondCRefImpl<typename std::remove_reference<T>::type, sizeof(SIZE_T) <= sizeof(std::size_t)>::type;
+    using CondCRef = typename CondCRefImpl<typename std::remove_reference<T>::type, sizeof(SIZE_T) <= sizeof(std::size_t)>::type;
 }}
 
 #endif
