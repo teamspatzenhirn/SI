@@ -10,8 +10,8 @@
 
 #include <iostream>
 
-#include "SiImpl.hpp"
 #include "SiGenerator.hpp"
+#include "SiImpl.hpp"
 
 SI_CREATE_UNIT(Speed, speed, 1, 0, -1, 0, 0, 0, 0)
 SI_CREATE_UNIT(Acceleration, acceleration, 1, 0, -2, 0, 0, 0, 0)

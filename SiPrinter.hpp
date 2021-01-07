@@ -45,6 +45,6 @@ namespace si {
         unitToString<m, kg, s, A, K, MOL, CD>(ostream);
         return ostream;
     }
-}
+} // namespace si
 
 #endif
