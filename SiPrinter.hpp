@@ -28,7 +28,7 @@ namespace si {
     void printHelper<1>(std::ostream &ostream, const char *name);
 
     template<int m, int kg, int s, int A, int K, int MOL, int CD>
-    void unitToString(std::ostream &ostream)  {
+    void unitToString(std::ostream &ostream) {
         printHelper<m>(ostream, "m");
         printHelper<kg>(ostream, "kg");
         printHelper<s>(ostream, "s");

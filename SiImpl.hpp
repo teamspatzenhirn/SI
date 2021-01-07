@@ -23,7 +23,7 @@ namespace si {
     using default_type = SI_DEFAULT_TYPE;
 #endif
 
-    template <typename T>
+    template<typename T>
     struct IsSi {
         static constexpr auto val = false;
     };
@@ -32,7 +32,7 @@ namespace si {
     class Si {
             using ThisT = Si<m, kg, s, A, K, MOL, CD, T>;
 
-            static constexpr bool isScalar = (m==0 && kg == 0 && s == 0 && A == 0 && K == 0 && MOL == 0 && CD == 0);
+            static constexpr bool isScalar = (m == 0 && kg == 0 && s == 0 && A == 0 && K == 0 && MOL == 0 && CD == 0);
             static_assert(!IsSi<T>::val, "Type T for SI is another instance of SI, your are not allowed to "
                                          "wrap SI in SI");
         public:
@@ -52,7 +52,7 @@ namespace si {
              * DO NOT TRY TO IMPLEMENT THESE FUNCTIONS BELOW LIKE ALL OTHER FUNCTIONS, GCC (UP TO 10.1)
              * IS BROKEN AND WILL COMPLETELY IGNORE THE explicit SPECIFIER!
              */
-            constexpr EXPLICIT(!isScalar) Si(T val) noexcept : val{val} {}
+            constexpr EXPLICIT(!isScalar) Si(T val) noexcept: val{val} {}
 
             constexpr EXPLICIT(!isScalar) operator T() const noexcept { return val; }
 
@@ -78,7 +78,7 @@ namespace si {
             // Multiply with Unitless
             constexpr auto operator*(T rhs) const -> Si<m, kg, s, A, K, MOL, CD, T>;
 
-            constexpr auto operator*=(T rhs) -> ThisT&;
+            constexpr auto operator*=(T rhs) -> ThisT &;
 
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_>
             friend constexpr auto operator*(T_ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
@@ -88,7 +88,7 @@ namespace si {
             constexpr auto operator/(T rhs) const
             -> Si<m, kg, s, A, K, MOL, CD, T>;
 
-            constexpr auto operator/=(T rhs) -> ThisT&;
+            constexpr auto operator/=(T rhs) -> ThisT &;
 
             template<int m_, int kg_, int s_, int A_, int K_, int MOL_, int CD_, typename T_>
             friend constexpr auto operator/(T_ lhs, Si<m_, kg_, s_, A_, K_, MOL_, CD_, T_> rhs)
@@ -119,7 +119,9 @@ namespace si {
 
             constexpr auto operator>=(ThisT rhs) const -> bool;
 #else
+
             constexpr auto operator<=>(const ThisT &rhs) const = default;
+
 #endif
 
         private:
@@ -180,7 +182,7 @@ namespace si {
     }
 
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
-    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator*=(T rhs) -> ThisT& {
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator*=(T rhs) -> ThisT & {
         this->val *= rhs;
         return *this;
     }
@@ -199,7 +201,7 @@ namespace si {
     }
 
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
-    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator/=(T rhs) -> ThisT& {
+    constexpr auto Si<m, kg, s, A, K, MOL, CD, T>::operator/=(T rhs) -> ThisT & {
         this->val /= rhs;
         return *this;
     }
