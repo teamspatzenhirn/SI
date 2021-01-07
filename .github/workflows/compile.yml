@@ -1,5 +1,5 @@
 name: Compile
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   build:
@@ -7,9 +7,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04]
-        cxx: [g++, clang++]
-        build: [Release, Debug]
+        os: [ ubuntu-18.04, ubuntu-20.04 ]
+        cxx: [ g++, clang++ ]
+        build: [ Release, Debug ]
     env:
       CXX: ${{ matrix.cxx }}
 
