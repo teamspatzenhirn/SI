@@ -4,7 +4,7 @@
  * @date 11.07.20
  * Implementation of the specializations for the printer module.
  */
-#include "SiPrinter.hpp"
+#include "SI/SiPrinter.hpp"
 
 namespace si {
     template<>
