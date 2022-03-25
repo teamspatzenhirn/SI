@@ -41,7 +41,7 @@ Example
 ```c++
 Meter<> dist = 1.0 * meter + 2.0 * meter;
 Speed<> v = dist / (3.0 * second);
-Second<> time = v * 10.0 * second;
+Second<> time = 7.0 * meter / v;
 ```
 
 ### Literals
