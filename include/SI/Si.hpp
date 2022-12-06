@@ -1,5 +1,5 @@
 /**
- * @file SI.hpp
+ * @file Si.hpp
  * @author paul
  * @date 13.07.20
  * Single header to include all parts of SI at once
