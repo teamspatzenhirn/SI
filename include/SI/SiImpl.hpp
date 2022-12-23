@@ -1,5 +1,5 @@
 /**
- * @file Si.hpp
+ * @file SiImpl.hpp
  * @author paul
  * @date 20.03.19
  * @brief Main implementation of the Si class which is the basis for all other functions.
@@ -10,9 +10,11 @@
 
 #include <utility>
 
-#if __cpp_conditional_explicit
+#if __cpp_conditional_explicit \
+    // NOLINTNEXTLINE(cppcoreguidelines-macro-usage) keyword can not be replaced by constexpr function
     #define EXPLICIT(expr) explicit(expr)
 #else
+    // NOLINTNEXTLINE(cppcoreguidelines-macro-usage) keyword can not be replaced by constexpr function
     #define EXPLICIT(expr) explicit
 #endif
 
@@ -23,11 +25,26 @@ namespace si {
     using default_type = SI_DEFAULT_TYPE;
 #endif
 
+    /**
+     * Type trait to check wheter a type is an SI instance.
+     * @tparam T the type to check.
+     */
     template<typename T>
     struct IsSi {
         static constexpr auto val = false;
     };
 
+    /**
+     * Class to represent a number with unit.
+     * @tparam m the meter exponent
+     * @tparam kg the kilogram exponent
+     * @tparam s the second exponent
+     * @tparam A the Ampere exponent
+     * @tparam K the Kelvin exponent
+     * @tparam MOL the Mol exponent
+     * @tparam CD the Candela exponent
+     * @tparam T the underlying numerical type
+     */
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T = default_type>
     class Si {
         using ThisT = Si<m, kg, s, A, K, MOL, CD, T>;
@@ -122,15 +139,24 @@ namespace si {
 
         constexpr auto operator>=(ThisT rhs) const -> bool;
 #else
-
         constexpr auto operator<=>(const ThisT &rhs) const = default;
-
 #endif
 
       private:
         T val;
     };
 
+    /**
+     * Specialization of type trait to check wheter a type is an SI instance for SI instances.
+     * @tparam m the meter exponent
+     * @tparam kg the kilogram exponent
+     * @tparam s the second exponent
+     * @tparam A the Ampere exponent
+     * @tparam K the Kelvin exponent
+     * @tparam MOL the Mol exponent
+     * @tparam CD the Candela exponent
+     * @tparam T the underlying numerical type
+     */
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T>
     struct IsSi<Si<m, kg, s, A, K, MOL, CD, T>> {
         static constexpr auto val = true;

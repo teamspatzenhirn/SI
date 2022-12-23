@@ -2,7 +2,7 @@
  * @file SiStl.hpp
  * @author paul
  * @date 03.04.20
- * Specialization of STL functions for SI types.
+ * @brief Specialization of STL functions for SI types.
  */
 #ifndef SI_SISTL_HPP
 #define SI_SISTL_HPP
