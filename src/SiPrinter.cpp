@@ -8,7 +8,7 @@
 
 namespace si {
     template<>
-    void printHelper<0>(std::ostream &, const char *) {
+    void printHelper<0>(std::ostream & /*ostream*/, const char * /*name*/) {
     }
 
     template<>

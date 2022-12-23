@@ -29,11 +29,13 @@ namespace si {
      * @see printHelper
      */
     template<>
-    void printHelper<0>(std::ostream &, const char *);
+    void printHelper<0>(std::ostream & /*ostream*/, const char * /*name*/);
 
     /**
      * Helper to print a single base unit with exponent 1 (i.e. 1/[unit]).
      * @see printHelper
+     * @param ostream the output stream to print to
+     * @param name the name of the unit
      */
     template<>
     void printHelper<-1>(std::ostream &ostream, const char *name);
@@ -41,6 +43,8 @@ namespace si {
     /**
      * Helper to print a single base unit with exponent 1 (i.e. [unit]).
      * @see printHelper
+     * @param ostream the output stream to print to
+     * @param name the name of the unit
      */
     template<>
     void printHelper<1>(std::ostream &ostream, const char *name);
