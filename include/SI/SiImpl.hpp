@@ -132,7 +132,7 @@ namespace si {
         constexpr auto operator-(ThisT rhs) const -> ThisT;
 
         /**
-         * Decrement Increment object by SI object of same unit and type
+         * Decrement object by SI object of same unit and type
          * @param rhs the object to subtract
          * @return the difference of both values with same unit
          */
