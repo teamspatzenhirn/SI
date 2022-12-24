@@ -13,7 +13,7 @@
 
 #if __cpp_conditional_explicit
     // NOLINTNEXTLINE(cppcoreguidelines-macro-usage) keyword can not be replaced by constexpr function
-    #define IMPLICIT_FOR_SCALAR explicit(not scalar) ///< Condition explicit for C++20 and later.
+    #define IMPLICIT_FOR_SCALAR explicit(not isScalar) ///< Condition explicit for C++20 and later.
 #else
     // NOLINTNEXTLINE(cppcoreguidelines-macro-usage) keyword can not be replaced by constexpr function
     #define IMPLICIT_FOR_SCALAR explicit ///< Non condition explicit for older compilers.
