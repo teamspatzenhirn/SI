@@ -3,6 +3,7 @@
  * @author paul
  * @date 11.07.20
  * @brief Declaration of all functions related to printing Si instances together with their respective unit.
+ * @ingroup SI
  */
 #ifndef SI_SIPRINTER_HPP
 #define SI_SIPRINTER_HPP

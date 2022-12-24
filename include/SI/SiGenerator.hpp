@@ -4,6 +4,7 @@
  * @date 11.07.20
  * @brief Header file with the definitions for the macros for generating code for new units. This code consists
  * of the type definition, the definition of a constant and the literals (both with and without prefixes).
+ * @ingroup SI
  */
 #ifndef SI_SIGENERATOR_HPP
 #define SI_SIGENERATOR_HPP

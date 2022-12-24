@@ -3,6 +3,7 @@
  * @author paul
  * @date 23.03.19
  * @brief Definition of the types, constants and literals for derived types.
+ * @ingroup SI
  */
 
 #ifndef SI_SIEXTENDED_HPP

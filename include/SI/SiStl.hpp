@@ -3,6 +3,7 @@
  * @author paul
  * @date 03.04.20
  * @brief Specialization of STL functions for SI types.
+ * @ingroup SI
  */
 #ifndef SI_SISTL_HPP
 #define SI_SISTL_HPP
