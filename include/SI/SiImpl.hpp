@@ -13,10 +13,10 @@
 
 #if __cpp_conditional_explicit
     // NOLINTNEXTLINE(cppcoreguidelines-macro-usage) keyword can not be replaced by constexpr function
-    #define EXPLICIT(expr) explicit(expr) ///< Condition explicit for C++20 and later.
+    #define IMPLICIT_FOR_SCALAR explicit(not scalar) ///< Condition explicit for C++20 and later.
 #else
     // NOLINTNEXTLINE(cppcoreguidelines-macro-usage) keyword can not be replaced by constexpr function
-    #define EXPLICIT(expr) explicit ///< Non condition explicit for older compilers.
+    #define IMPLICIT_FOR_SCALAR explicit ///< Non condition explicit for older compilers.
 #endif
 
 #ifndef SI_DEFAULT_TYPE
@@ -80,7 +80,7 @@ namespace si {
          * and will completely ignore the EXPLICIT specifier!
          * @param val the numerical value.
          */
-        constexpr EXPLICIT(!isScalar) Si(T val) noexcept : val{val} /* NOLINT(google-explicit-constructor) */ {
+        constexpr IMPLICIT_FOR_SCALAR Si(T val) noexcept : val{val} /* NOLINT(google-explicit-constructor) */ {
         }
 
         /**
@@ -88,7 +88,7 @@ namespace si {
          * explicit conversion is required.
          * @return the underlying numerical value
          */
-        constexpr EXPLICIT(!isScalar) operator T() const noexcept /* NOLINT(google-explicit-constructor) */ {
+        constexpr IMPLICIT_FOR_SCALAR operator T() const noexcept /* NOLINT(google-explicit-constructor) */ {
             return val;
         }
 
@@ -241,6 +241,7 @@ namespace si {
         constexpr auto operator/(Si<m_, kg_, s_, A_, K_, MOL_, CD_, T> rhs) const
                 -> Si<m - m_, kg - kg_, s - s_, A - A_, K - K_, MOL - MOL_, CD - CD_, T>;
 
+
 #ifndef __cpp_impl_three_way_comparison
         /**
          * Equality operator for SI types. Requires same unit, then performs comparison by value.
@@ -369,6 +370,20 @@ namespace si {
         return *this;
     }
 
+    /**
+         * Calculates scalar/SI, value and unit are inverted.
+         * @tparam m_ the meter exponent
+         * @tparam kg_ the kilogram exponent
+         * @tparam s_ the second exponent
+         * @tparam A_ the Ampere exponent
+         * @tparam K_ the Kelvin exponent
+         * @tparam MOL_ the Mol exponent
+         * @tparam CD_ the Candela exponent
+         * @tparam T_ the underlying numerical type
+         * @param lhs the scalar value
+         * @param rhs the SI value
+         * @return the scaled value
+     */
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_>
     constexpr auto operator*(T_ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs) -> Si<m, kg, s, A, K, MOL, CD, T_> {
         return Si<m, kg, s, A, K, MOL, CD, T_>{lhs * rhs.val};
@@ -386,6 +401,20 @@ namespace si {
         return *this;
     }
 
+    /**
+         * Calculates scalar/SI, value and unit are inverted.
+         * @tparam m_ the meter exponent
+         * @tparam kg_ the kilogram exponent
+         * @tparam s_ the second exponent
+         * @tparam A_ the Ampere exponent
+         * @tparam K_ the Kelvin exponent
+         * @tparam MOL_ the Mol exponent
+         * @tparam CD_ the Candela exponent
+         * @tparam T_ the underlying numerical type
+         * @param lhs the scalar value
+         * @param rhs the SI value
+         * @return the scaled value
+     */
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_>
     constexpr auto operator/(T_ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs) -> Si<-m, -kg, -s, -A, -K, -MOL, -CD, T_> {
         return Si<-m, -kg, -s, -A, -K, -MOL, -CD, T_>{lhs / static_cast<T_>(rhs)};
