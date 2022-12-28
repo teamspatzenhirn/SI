@@ -371,18 +371,18 @@ namespace si {
     }
 
     /**
-         * Calculates scalar/SI, value and unit are inverted.
-         * @tparam m_ the meter exponent
-         * @tparam kg_ the kilogram exponent
-         * @tparam s_ the second exponent
-         * @tparam A_ the Ampere exponent
-         * @tparam K_ the Kelvin exponent
-         * @tparam MOL_ the Mol exponent
-         * @tparam CD_ the Candela exponent
-         * @tparam T_ the underlying numerical type
-         * @param lhs the scalar value
-         * @param rhs the SI value
-         * @return the scaled value
+     * Calculates scalar/SI, value and unit are inverted.
+     * @tparam m_ the meter exponent
+     * @tparam kg_ the kilogram exponent
+     * @tparam s_ the second exponent
+     * @tparam A_ the Ampere exponent
+     * @tparam K_ the Kelvin exponent
+     * @tparam MOL_ the Mol exponent
+     * @tparam CD_ the Candela exponent
+     * @tparam T_ the underlying numerical type
+     * @param lhs the scalar value
+     * @param rhs the SI value
+     * @return the scaled value
      */
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_>
     constexpr auto operator*(T_ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs) -> Si<m, kg, s, A, K, MOL, CD, T_> {
@@ -402,18 +402,18 @@ namespace si {
     }
 
     /**
-         * Calculates scalar/SI, value and unit are inverted.
-         * @tparam m_ the meter exponent
-         * @tparam kg_ the kilogram exponent
-         * @tparam s_ the second exponent
-         * @tparam A_ the Ampere exponent
-         * @tparam K_ the Kelvin exponent
-         * @tparam MOL_ the Mol exponent
-         * @tparam CD_ the Candela exponent
-         * @tparam T_ the underlying numerical type
-         * @param lhs the scalar value
-         * @param rhs the SI value
-         * @return the scaled value
+     * Calculates scalar/SI, value and unit are inverted.
+     * @tparam m_ the meter exponent
+     * @tparam kg_ the kilogram exponent
+     * @tparam s_ the second exponent
+     * @tparam A_ the Ampere exponent
+     * @tparam K_ the Kelvin exponent
+     * @tparam MOL_ the Mol exponent
+     * @tparam CD_ the Candela exponent
+     * @tparam T_ the underlying numerical type
+     * @param lhs the scalar value
+     * @param rhs the SI value
+     * @return the scaled value
      */
     template<int m, int kg, int s, int A, int K, int MOL, int CD, typename T_>
     constexpr auto operator/(T_ lhs, Si<m, kg, s, A, K, MOL, CD, T_> rhs) -> Si<-m, -kg, -s, -A, -K, -MOL, -CD, T_> {
