@@ -2,7 +2,8 @@
  * @file SiPrinterExtended.hpp
  * @author paul
  * @date 14.07.20
- * Header used for declaring specializations for pretty printing custom types.
+ * @brief Header used for declaring specializations for pretty printing custom types.
+ * @ingroup SI
  */
 #ifndef SI_SIPRINTEREXTENDED_HPP
 #define SI_SIPRINTEREXTENDED_HPP

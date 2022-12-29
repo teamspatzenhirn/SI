@@ -2,13 +2,17 @@
  * @file SiGenerator.hpp
  * @author paul
  * @date 11.07.20
- * Header file with the definitions for the macros for generating code for new units. This code consists
+ * @brief Header file with the definitions for the macros for generating code for new units. This code consists
  * of the type definition, the definition of a constant and the literals (both with and without prefixes).
+ * @ingroup SI
  */
 #ifndef SI_SIGENERATOR_HPP
 #define SI_SIGENERATOR_HPP
 
-#define SI_CREATE_ALL_PREFIX(BASE_NAME, m, kg, s, A, K, Mol, CD)                                                       \
+/**
+ * Macro to generate the prefixed-literals for a unit (i.e. kilo-meter, mega-meter...).
+ */
+#define SI_CREATE_ALL_PREFIX(BASE_NAME, m, kg, s, A, K, Mol, CD) /* NOLINT(cppcoreguidelines-macro-usage) */           \
     constexpr Si<m, kg, s, A, K, Mol, CD> operator"" _Y_##BASE_NAME(long double t) {                                   \
         return Si<m, kg, s, A, K, Mol, CD>{static_cast<si::default_type>(t * 1E24)};                                   \
     }                                                                                                                  \
@@ -136,7 +140,10 @@
         return Si<m, kg, s, A, K, Mol, CD>{static_cast<si::default_type>(t * 1E-24)};                                  \
     }
 
-#define SI_CREATE_UNIT(Name, name, m, kg, s, A, K, Mol, CD)                                                            \
+/**
+ * Macro to generate all definitions for a unit, i.e. a corresponding type, a constant and all literals.
+ */
+#define SI_CREATE_UNIT(Name, name, m, kg, s, A, K, Mol, CD) /* NOLINT(cppcoreguidelines-macro-usage) */                \
     namespace si {                                                                                                     \
         template<typename T = si::default_type>                                                                        \
         using Name = Si<m, kg, s, A, K, Mol, CD, T>;                                                                   \
@@ -146,7 +153,10 @@
         }                                                                                                              \
     }
 
-#define SI_CUSTOM_PRINTER_IMPL(Type, name)                                                                             \
+/**
+ * Macro to generate the specialization of the unitToString function for a specific type.
+ */
+#define SI_CUSTOM_PRINTER_IMPL(Type, name) /* NOLINT(cppcoreguidelines-macro-usage) */                                 \
     namespace si {                                                                                                     \
         template<>                                                                                                     \
         void unitToString<Type<>::meter, Type<>::kilogram, Type<>::second, Type<>::ampere, Type<>::kelvin,             \
@@ -155,7 +165,10 @@
         }                                                                                                              \
     }
 
-#define SI_CUSTOM_PRINTER_DEC(Type)                                                                                    \
+/**
+ * Macro to generate declaration of the the specialization of the unitToString function for a specific type.
+ */
+#define SI_CUSTOM_PRINTER_DEC(Type) /* NOLINT(cppcoreguidelines-macro-usage) */                                        \
     namespace si {                                                                                                     \
         template<>                                                                                                     \
         void unitToString<Type<>::meter, Type<>::kilogram, Type<>::second, Type<>::ampere, Type<>::kelvin,             \

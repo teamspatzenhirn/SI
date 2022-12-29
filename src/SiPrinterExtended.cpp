@@ -2,7 +2,7 @@
  * @file SiPrinterExtended.cpp
  * @author paul
  * @date 14.07.20
- * Translation units for implementations of custom pretty printers.
+ * @brief Translation units for implementations of custom pretty printers.
  */
 #include "SI/SiPrinterExtended.hpp"
 

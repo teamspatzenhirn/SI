@@ -1,11 +1,17 @@
 /**
- * @file SI.hpp
+ * @file Si.hpp
  * @author paul
  * @date 13.07.20
- * Single header to include all parts of SI at once
+ * @brief Single header to include all parts of SI at once
+ * @ingroup SI
  */
 #ifndef SI_SI_HPP
 #define SI_SI_HPP
+
+/**
+ * @defgroup SI SI Library
+ * @brief Library for providing unit support using the C++ type system.
+ */
 
 #include "SiBase.hpp"
 #include "SiExtended.hpp"
